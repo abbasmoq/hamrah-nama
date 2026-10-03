@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+build/
+dist/
+*.spec
+tools/win32/
+tools/win64/
+recordings/
+
