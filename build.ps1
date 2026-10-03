@@ -18,13 +18,17 @@ python -m PyInstaller --noconfirm --clean --windowed --onefile `
     --specpath "build\$Architecture" `
     main.py
 
+$LiteArchive = "dist\HamrahNama-lite-$Architecture.zip"
+Compress-Archive -LiteralPath (Join-Path $OutputDirectory "HamrahNama.exe") -DestinationPath $LiteArchive -Force
+
 $CachedTools = Join-Path $env:LOCALAPPDATA "HamrahNama\tools"
 if (Test-Path -LiteralPath $CachedTools) {
     Copy-Item -LiteralPath $CachedTools -Destination (Join-Path $OutputDirectory "tools") -Recurse -Force
 }
 
-$Archive = "dist\HamrahNama-portable-$Architecture.zip"
-Compress-Archive -Path "$OutputDirectory\*" -DestinationPath $Archive -Force
+$FullArchive = "dist\HamrahNama-portable-$Architecture.zip"
+Compress-Archive -Path "$OutputDirectory\*" -DestinationPath $FullArchive -Force
 
-Write-Host "Portable build completed: $Archive"
+Write-Host "Lite build completed: $LiteArchive"
+Write-Host "Full Portable build completed: $FullArchive"
 Write-Host "برای خروجی win32 این اسکریپت را با Python 32-bit اجرا کنید."
